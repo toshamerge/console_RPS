@@ -1,2 +1,1 @@
-this is some infomration about the project
-hehe
+this is a test project for OdinProject site. Just testing JS here.
