@@ -24,7 +24,7 @@ function getComputerChoice(){
 }
 // Функция получающая челвоеческий вариант через промпт и возвращающая его
 function getHumanChoice(){
-    let humanChoice = prompt("Введи свой выбор: ", null)
+    let humanChoice = prompt("Введи свой выбор: ", "sampletext")
     humanChoice = humanChoice.toLowerCase();
     return humanChoice;
 }
@@ -47,14 +47,12 @@ function validateUserInput(userInput) {
     }
   }
 
-const humanSelection = validateUserInput();
-const computerSelection = getComputerChoice();
 
 
 
 function playRound(realHumanChoice, realComputerChoice){
     if (realHumanChoice == realComputerChoice) {
-        return "Ты и компьютер выбрали" + " " + `${realHumanChoice}` + ", Ничья!\n"
+        return "Ничья! Ты и компьютер выбрали - " + " " + `${realHumanChoice}` + "\n"
         + "Ваш текущий счёт: \n" 
         + "Вы: " + `${humanScore}` + " | " + "Компьютер: " + `${computerScore}`;
     }
@@ -62,20 +60,36 @@ function playRound(realHumanChoice, realComputerChoice){
             || ( realHumanChoice == "бумага"  && realComputerChoice == "камень")  
             || ( realHumanChoice == "ножницы" && realComputerChoice == "бумага")){
                 humanScore += 1;
-                return "Ты победил! Компьютер выбрал " + `${realComputerChoice}` + "\n"
+                return "Ты победил! Компьютер выбрал - " + `${realComputerChoice}` + "\n"
                 + "Ваш текущий счёт: \n" 
                 + "Вы: " + `${humanScore}` + " | " + "Компьютер: " + `${computerScore}`;
     }
 
     else {
         computerScore += 1;
-        return "Ты проиграл! Компьютер выбрал " + `${realComputerChoice}`+ "\n"
+        return "Ты проиграл! Компьютер выбрал - " + `${realComputerChoice}`+ "\n"
         + "Ваш текущий счёт: \n" 
         + "Вы: " + `${humanScore}` + " | " + "Компьютер: " + `${computerScore}`;
     }
 
 }
 
-console.log(playRound(humanSelection, computerSelection));
+function playGame() {
+    humanSelection = validateUserInput();
+    computerSelection = getComputerChoice();
+    console.log(playRound(humanSelection, computerSelection));
+}
 
 
+
+while (true) {
+    playGame();
+    if (computerScore >= 3) {
+        console.log("Увы, ты проиграл! Компьютер первым достиг 3х очков")
+        break
+    }
+    else if (humanScore >= 3) {
+        console.log("Ура, ты победил! Ты первым набрал 3 очка")
+        
+    }
+}
